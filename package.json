@@ -4,16 +4,17 @@
   "description": "New Electron app",
   "main": "./dist/main.js",
   "scripts": {
-    "dev:electron": "NODE_ENV=development webpack --config webpack.electron.config.js --mode development && electron .",
-    "dev:react": "NODE_ENV=development webpack-dev-server --config webpack.react.config.js --mode development",
-    "build:electron": "NODE_ENV=production webpack --config webpack.electron.config.js --mode production",
-    "build:react": "NODE_ENV=production webpack --config webpack.react.config.js --mode production",
+    "dev:electron": "cross-env NODE_ENV=development webpack --config webpack.electron.config.js --mode development && electron .",
+    "dev": "cross-env NODE_ENV=development nodemon",
+    "dev:react": "cross-env NODE_ENV=development webpack-dev-server --config webpack.react.config.js --mode development",
+    "build:electron": "cross-env NODE_ENV=production webpack --config webpack.electron.config.js --mode production",
+    "build:react": "cross-env NODE_ENV=production webpack --config webpack.react.config.js --mode production",
     "build": "npm run build:electron && npm run build:react",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
   "keywords": [],
-  "author": "elisealcala",
+  "author": "phibersoft",
   "license": "ISC",
   "build": {
     "files": [
@@ -21,8 +22,9 @@
       "node_modules/",
       "package.json"
     ],
-    "productName": "example",
-    "appId": "com.example.app",
+    "productName": "PhiberApp",
+    "description": "Thanks to elia!",
+    "appId": "com.phiber.app",
     "directories": {
       "output": "dist"
     }
@@ -43,7 +45,25 @@
   "dependencies": {
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "cross-env": "^7.0.2",
+    "nodemon": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      "**/*.interface.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      ".",
+      "./*",
+      "**"
+    ],
+    "exec": "npm run dev:electron",
+    "ext": "ts"
   }
 }
